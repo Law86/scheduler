@@ -8,13 +8,13 @@ export default function DayListItem(props) {
     "day-list__item--full": props.spots === 0,
   });
 
-  const spotsAvailable = (spots) => {
+  const spotsRemaining = (spots) => {
     if (spots === 0) {
-      return "no spots available";
+      return "no spots remaining";
     } else if (spots === 1) {
-      return `${spots} spot available`;
+      return `${spots} spot remaining`;
     } else {
-      return `${spots} spots available`;
+      return `${spots} spots remaining`;
     }
   };
 
@@ -26,7 +26,7 @@ export default function DayListItem(props) {
     >
       <h2 className="text--regular">{props.name}</h2>
       <>
-        <h3 className="text--light">{spotsAvailable(props.spots)}</h3>
+        <h3 className="text--light">{spotsRemaining(props.spots)}</h3>
       </>
     </li>
   );
