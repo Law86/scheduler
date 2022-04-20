@@ -20,14 +20,12 @@ export default function DayListItem(props) {
 
   return (
     <li
-      data-testid="day"
       className={dayClass}
       onClick={() => props.setDay(props.name)}
+      selected={props.selected}
     >
       <h2 className="text--regular">{props.name}</h2>
-      <>
-        <h3 className="text--light">{spotsRemaining(props.spots)}</h3>
-      </>
+      <h3 className="text--light">{formatSpots()}</h3>
     </li>
   );
 }
