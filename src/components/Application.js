@@ -3,6 +3,7 @@ import Appointment from "./Appointment";
 import "components/Application.scss";
 import DayList from "./DayList";
 import axios from "axios";
+import reactDom from "react-dom";
 
 const appointments = {
   1: {
@@ -51,9 +52,11 @@ export default function Application(props) {
   });
   useEffect(() => {
     axios.get("/api/days").then((res) => {
-      setDays(res.data);
+      setState({ ...state, days: res.data });
     });
   }, []);
+
+  const setDay = (day) => setState({ ...state, day });
 
   return (
     <main className="layout">
@@ -65,7 +68,7 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList days={state.days} day={state.day} setDay={setDay} />
+          <DayList days={state.days} value={state.day} onChange={setDay} />
         </nav>
         <img
           className="sidebar__lhl sidebar--centered"
@@ -74,7 +77,6 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {schedule}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
