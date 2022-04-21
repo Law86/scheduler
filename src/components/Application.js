@@ -47,8 +47,6 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    // you may put the line below, but will have to remove/comment hardcoded appointments variable
-    appointments: {},
   });
   useEffect(() => {
     axios.get("/api/days").then((res) => {
@@ -56,7 +54,6 @@ export default function Application(props) {
     });
   }, []);
 
-  console.log(days);
   return (
     <main className="layout">
       <section className="sidebar">
@@ -67,9 +64,8 @@ export default function Application(props) {
         />
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
-          <DayList days={days} value={days} onChange={setDays} />
+          <DayList days={state.days} day={state.day} setDay={setDay} />
         </nav>
-
         <img
           className="sidebar__lhl sidebar--centered"
           src="images/lhl.png"
@@ -77,9 +73,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {Object.values(appointments).map((appointment) => {
-          return <Appointment key={appointment.id} {...appointment} />;
-        })}
+        {schedule}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
