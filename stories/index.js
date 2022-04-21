@@ -15,6 +15,7 @@ import Empty from "components/Appointment/Empty.js";
 import Show from "components/Appointment/Show.js";
 import Confirm from "components/Appointment/Confirm.js";
 import Status from "components/Appointment/Status.js";
+import Error from "components/Appointment/Error.js";
 
 storiesOf("Button", module)
   .addParameters({
@@ -190,3 +191,11 @@ storiesOf("Status", module)
     backgrounds: [{ name: "white", value: "#fff", default: true }],
   })
   .add("Status", () => <Status message="Deleting" />);
+
+storiesOf("Error", module)
+  .addParameters({
+    backgrounds: [{ name: "white", value: "#fff", default: true }],
+  })
+  .add("Error Deleting", () => (
+    <Error message="Could not delete appointment" onClose={action("onClose")} />
+  ));
