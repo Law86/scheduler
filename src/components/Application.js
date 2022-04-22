@@ -65,21 +65,25 @@ export default function Application(props) {
         const interviewers = res[2].data
 
         setState(prev => ({ ...prev, days, appointments, interviewers }));
-        console.log(state.interviewers)
+        console.log(interviewers)
       });
   }, []);
 
   const setDay = (day) => setState({ ...state, day });
 
   const dailyAppointments = getAppointmentsForDay(state, state.day);
-  const apptList = dailyAppointments.map((appointment) => (
-    <Appointment
-      key={appointment.id}
-      id={appointment.id}
-      time={appointment.time}
-      interview={appointment.interview}
-    />
-  ));
+  const apptList = dailyAppointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+
+    return (
+      <Appointment
+        key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        interview={interview}
+      />
+    );
+  });
 
   return (
     <main className="layout">
