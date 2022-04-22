@@ -1,3 +1,5 @@
+// Retrieves the appointment for the day selected
+
 export function getAppointmentsForDay(state, dayName) {
   // step 1 - find the day object
   // step 2 - iterate appointment ids
@@ -17,4 +19,16 @@ export function getAppointmentsForDay(state, dayName) {
   }
 
   return results;
+}
+
+export function getInterview(state, interview) {
+  if (!interview) {
+    return null;
+  }
+  const interviewContent = {
+    student: interview.student
+  };
+
+  interviewContent.interviewer = state.interviewers[interview.interviewer];
+  return interviewContent;
 }

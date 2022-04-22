@@ -22,7 +22,7 @@ export default function Appointment(props) {
         {props.time}
         <Show
           student={props.interview.student}
-          interviewer={props.interview.interviewer.name}
+          interviewer={props.interview.interviewer}
         />
       </article>
     );
