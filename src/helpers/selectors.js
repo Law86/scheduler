@@ -1,8 +1,20 @@
-export function getAppointmentsForDay(state, day) {
-  const daysAppt = state.days.map((day) => day.name);
-  if (!day || !daysAppt.includes(day)) return [];
+export function getAppointmentsForDay(state, dayName) {
+  // step 1 - find the day object
+  // step 2 - iterate appointment ids
+  // step 3 - get appointment for each id
+  // step 4 - add apointment to list
+  // step 5 - return list
 
-  return state.days
-    .filter((appointment) => appointment.name === day)[0]
-    .appointments.map((apptId) => state.appointments[apptId]);
+  const results = [];
+  const day = state.days.find(d => d.name == dayName)
+  if (!day) {
+    return [];
+  }
+
+  for (const id of day.appointments) {
+    const appointment = state.appointments[id]
+    results.push(appointment)
+  }
+
+  return results;
 }
