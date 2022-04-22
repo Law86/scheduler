@@ -56,13 +56,16 @@ export default function Application(props) {
   useEffect(() => {
     const promise1 = axios.get("/api/days");
     const promise2 = axios.get("/api/appointments");
+    const promise3 = axios.get("/api/interviewers")
 
-    Promise.all([promise1, promise2])
+    Promise.all([promise1, promise2, promise3])
       .then((res) => {
         const days = res[0].data
         const appointments = res[1].data
+        const interviewers = res[2].data
 
-        setState(prev => ({ ...prev, days, appointments }));
+        setState(prev => ({ ...prev, days, appointments, interviewers }));
+        console.log(state.interviewers)
       });
   }, []);
 
