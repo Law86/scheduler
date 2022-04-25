@@ -45,6 +45,10 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+  function edit() {
+    transition(EDITING);
+  }
+
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -60,6 +64,7 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={() => transition(CONFIRMING)}
+          onEdit={() => edit()}
         />)}
       {mode === CREATE && (
         <Form
@@ -74,6 +79,15 @@ export default function Appointment(props) {
           onConfirm={() => deleted()}
           onCancel={back}
           message="Confirm delete?"
+        />
+      )}
+      {mode === EDITING && (
+        <Form
+          student={props.interview.student}
+          interviewer={props.interview.interviewer}
+          interviewers={props.interviewers}
+          onSave={save}
+          onCancel={back}
         />
       )}
     </article>
