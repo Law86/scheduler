@@ -12,16 +12,23 @@ const CREATE = 'CREATE';
 
 
 export default function Appointment(props) {
-  const { mode, transition, back } = useVisualMode(
-    props.interview ? SHOW : EMPTY
-  );
-
+  // Saving an appointment function
   function save(name, interviewer) {
     const interview = {
       student: name,
       interviewer
     };
+    props
+      .bookInterview(props.id, interview)
+      .then(response => {
+        transition(SHOW);
+      })
+      .catch(error => transition(ERROR_SAVE, true));
   }
+
+  const { mode, transition, back } = useVisualMode(
+    props.interview ? SHOW : EMPTY
+  );
 
   return (
     <article className="appointment">
