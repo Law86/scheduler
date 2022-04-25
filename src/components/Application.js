@@ -39,11 +39,11 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    setState({
-      ...state,
-      appointments
-    });
+
+    dispatch({ type: SET_INTERVIEW, id: id, interview: interview });
+    return axios.put(`/api/appointments/${id}`, { interview });
   }
+  
 
   const setDay = (day) => setState({ ...state, day });
 
