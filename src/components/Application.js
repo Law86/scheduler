@@ -5,8 +5,6 @@ import DayList from "./DayList";
 import axios from "axios";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
-// import reactDom from "react-dom";
-
 export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
