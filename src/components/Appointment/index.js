@@ -15,7 +15,8 @@ const SAVING = 'SAVING';
 const DELETING = 'DELETING';
 const CONFIRMING = 'CONFIRMING';
 const EDITING = 'EDITING';
-
+const SAVE_ERR = "SAVE_ERR";
+const DELETE_ERR = "DELETE_ERR";
 
 export default function Appointment(props) {
   // Saving an appointment function
@@ -30,6 +31,7 @@ export default function Appointment(props) {
       .then(response => {
         transition(SHOW);
       })
+      .catch(error => transition(SAVE_ERR, true));
   }
 
   function deleted() {
@@ -39,6 +41,7 @@ export default function Appointment(props) {
       .then(() => {
         transition(EMPTY);
       })
+      .catch(error => transition(DELETE_ERR, true));
   }
 
   const { mode, transition, back } = useVisualMode(
@@ -87,6 +90,18 @@ export default function Appointment(props) {
           interviewer={props.interview.interviewer}
           interviewers={props.interviewers}
           onSave={save}
+          onCancel={back}
+        />
+      )}
+      {mode === SAVE_ERR && (
+        <Form
+          message="Could not complete your request to save"
+          onCancel={back}
+        />
+      )}
+      {mode === DELETE_ERR && (
+        <Form
+          message="Could not complete your request to delete"
           onCancel={back}
         />
       )}
