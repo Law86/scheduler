@@ -17,8 +17,8 @@ export default function Confirm(props) {
       return;
     }
 
-    // setError("");
-    // props.onSave(student, interviewer);
+    setError("");
+    props.onSave(student, interviewer);
   }
 
   const reset = function () {
