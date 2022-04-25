@@ -7,6 +7,7 @@ import Form from "./Form";
 import useVisualMode from "hooks/useVisualMode";
 import Status from "./Status";
 import Confirm from "./Confirm";
+import Error from "./Error";
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
@@ -21,26 +22,24 @@ const DELETE_ERR = "DELETE_ERR";
 export default function Appointment(props) {
   // Saving an appointment function
   function save(name, interviewer) {
-    transition(SAVING);
     const interview = {
       student: name,
       interviewer
     };
+
+    transition(SAVING);
+
     props
       .bookInterview(props.id, interview)
-      .then(response => {
-        transition(SHOW);
-      })
+      .then(() => transition(SHOW))
       .catch(error => transition(SAVE_ERR, true));
   }
 
-  function deleted() {
+  function deleted(event) {
     transition(DELETING, true);
     props
       .cancelInterview(props.id)
-      .then(() => {
-        transition(EMPTY);
-      })
+      .then(() => transition(EMPTY))
       .catch(error => transition(DELETE_ERR, true));
   }
 
@@ -94,15 +93,15 @@ export default function Appointment(props) {
         />
       )}
       {mode === SAVE_ERR && (
-        <Form
+        <Error
           message="Could not complete your request to save"
-          onCancel={back}
+          onClose={back}
         />
       )}
       {mode === DELETE_ERR && (
-        <Form
+        <Error
           message="Could not complete your request to delete"
-          onCancel={back}
+          onClose={back}
         />
       )}
     </article>
