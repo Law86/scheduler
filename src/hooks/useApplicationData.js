@@ -4,6 +4,8 @@ import axios from "axios";
 export default function useApplicationData(props) {
   const setDay = (day) => setState({ ...state, day });
 
+  // getSpotsForDay function that passes in two params, day obj and appointments. Return num of spots
+
   // updateSpots function 
 
   function bookInterview(id, interview) {
