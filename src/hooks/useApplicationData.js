@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useApplicationData(props) {
   const setDay = (day) => setState({ ...state, day });
+
+  // updateSpots function 
 
   function bookInterview(id, interview) {
     const appointment = {
@@ -15,6 +17,7 @@ export default function useApplicationData(props) {
     };
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
+        //update spots function here
         setState(prev => ({ ...prev, appointments }))
       })
   }
@@ -22,15 +25,11 @@ export default function useApplicationData(props) {
   function cancelInterview(id) {
     return axios.delete(`/api/appointments/${id}`)
       .then(() => {
-        const apptNull = {
+        const appointment = {
           ...state.appointments[id],
           interview: null
-        };
-        const appointments = {
-          ...state.appointments,
-          [id]: apptNull
         }
-        setState(prev => ({ ...prev, appointments }))
+        setState(prev => ({ ...prev, appointment }))
       })
   }
 

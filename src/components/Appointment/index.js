@@ -9,6 +9,7 @@ import Status from "./Status";
 import Confirm from "./Confirm";
 import Error from "./Error";
 
+// transition variables
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = 'CREATE';
