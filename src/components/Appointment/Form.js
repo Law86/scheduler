@@ -8,12 +8,12 @@ export default function Confirm(props) {
   const [error, setError] = useState("");
 
   function validate() {
-    if (!interviewer) {
-      setError("Must select an interviewer");
+    if (interviewer === null) {
+      setError("Please select an interviewer");
       return;
     }
     if (student === "") {
-      setError("Name of student cannot be empty");
+      setError("Student name cannot be blank");
       return;
     }
 
