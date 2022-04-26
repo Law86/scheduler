@@ -4,11 +4,14 @@ import axios from "axios";
 export default function useApplicationData(props) {
   const setDay = (day) => setState({ ...state, day });
 
-  // getSpotsForDay function that passes in two params, day obj and appointments. Return num of spots
-
-  // updateSpots function 
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    appointments: {},
+  });
 
   function bookInterview(id, interview) {
+
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -19,27 +22,41 @@ export default function useApplicationData(props) {
     };
     return axios.put(`/api/appointments/${id}`, { interview })
       .then(() => {
-        //update spots function here
-        setState(prev => ({ ...prev, appointments }))
+        setState(prev => {
+          const isEditingAppointment = prev.appointments[id].interview
+          console.log("isEditingAppointment", isEditingAppointment)
+          const updatedDays = prev.days.map(day => {
+            return {
+              ...day,
+              spots: day.name === prev.day && !isEditingAppointment ? day.spots - 1 : day.spots
+            }
+          })
+          return { ...prev, appointments, days: updatedDays }
+        })
       })
   }
 
   function cancelInterview(id) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    }
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
     return axios.delete(`/api/appointments/${id}`)
       .then(() => {
-        const appointment = {
-          ...state.appointments[id],
-          interview: null
-        }
-        setState(prev => ({ ...prev, appointment }))
+
+        const updatedDays = state.days.map(day => {
+          return {
+            ...day,
+            spots: day.name === state.day ? day.spots + 1 : day.spots
+          }
+        })
+        setState(prev => ({ ...prev, appointments, days: updatedDays }))
       })
   }
-
-  const [state, setState] = useState({
-    day: "Monday",
-    days: [],
-    appointments: {},
-  });
 
   useEffect(() => {
     const promise1 = axios.get("/api/days");
