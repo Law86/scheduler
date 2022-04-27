@@ -12,6 +12,11 @@ Test coverage by Storybook, Jest and Cypress
 
 Install dependencies with `npm install`.
 
+This repository requires a specific version of react-test-renderer, below;
+
+npm install react@^16.9.0
+npm install --save-dev react-test-renderer@^16.9.0
+
 ## Running Webpack Development Server
 
 ```sh
