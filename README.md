@@ -41,7 +41,7 @@ npm run storybook
 
 !["Home"](https://github.com/Law86/scheduler/blob/master/doc/screen1.png)
 
-## New Appointment
+## New/Edit Appointment
 
 !["New Appointment"](https://github.com/Law86/scheduler/blob/master/doc/screen2%20-%20new%20appt.png)
 
