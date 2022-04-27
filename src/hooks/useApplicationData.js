@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function useApplicationData(props) {
+
   const setDay = (day) => setState({ ...state, day });
 
   const [state, setState] = useState({
@@ -10,6 +11,7 @@ export default function useApplicationData(props) {
     appointments: {},
   });
 
+  // Function for saving and updating state
   function bookInterview(id, interview) {
 
     const appointment = {
@@ -24,7 +26,6 @@ export default function useApplicationData(props) {
       .then(() => {
         setState(prev => {
           const isEditingAppointment = prev.appointments[id].interview
-          console.log("isEditingAppointment", isEditingAppointment)
           const updatedDays = prev.days.map(day => {
             return {
               ...day,
@@ -36,6 +37,7 @@ export default function useApplicationData(props) {
       })
   }
 
+  // Function for deleting and handling state
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],
@@ -58,6 +60,7 @@ export default function useApplicationData(props) {
       })
   }
 
+  // API server requests for data
   useEffect(() => {
     const promise1 = axios.get("/api/days");
     const promise2 = axios.get("/api/appointments");
@@ -72,6 +75,7 @@ export default function useApplicationData(props) {
         setState(prev => ({ ...prev, days, appointments, interviewers }));
       });
   }, []);
+
   return {
     state,
     setDay,
