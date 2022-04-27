@@ -6,6 +6,8 @@ Interview Scheduler is a simple, yet powerful calendar for booking, editing and 
 
 Within the app, you can create a new appointment based on interviewer specific availablity. Once an appointment has been created, you can delete or edit them at any point. Office hours are between 12pm-5pm, and no new appointments after 4pm.
 
+Test coverage by Storybook, Jest and Cypress
+
 ## Setup
 
 Install dependencies with `npm install`.
@@ -41,7 +43,7 @@ npm run storybook
 
 !["Home"](https://github.com/Law86/scheduler/blob/master/doc/screen1.png)
 
-## New Appointment
+## New/Edit Appointment
 
 !["New Appointment"](https://github.com/Law86/scheduler/blob/master/doc/screen2%20-%20new%20appt.png)
 
