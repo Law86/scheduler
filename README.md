@@ -35,9 +35,20 @@ npm run storybook
 - Classnames
 - Normalize CSS
 
-## Screenshots
+# Screenshots
+
+## Home
 
 !["Home"](https://github.com/Law86/scheduler/blob/master/doc/screen1.png)
+
+## New Appointment
+
 !["New Appointment"](https://github.com/Law86/scheduler/blob/master/doc/screen2%20-%20new%20appt.png)
+
+## Appointment Hover
+
 !["Appointment Hover"](https://github.com/Law86/scheduler/blob/master/doc/screen%203%20-%20hover%20over%20edit%20delete.png)
+
+## Side Nav / Spots Available
+
 !["Side Nav feat. Spots"](https://github.com/Law86/scheduler/blob/master/doc/Spots%20remaining.png)
