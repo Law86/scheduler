@@ -2,41 +2,45 @@
 
 export function getAppointmentsForDay(state, dayName) {
   const results = [];
-  const day = state.days.find(d => d.name === dayName)
+  const day = state.days.find((d) => d.name === dayName);
   if (!day) {
     return [];
   }
 
   for (const id of day.appointments) {
-    const appointment = state.appointments[id]
-    results.push(appointment)
+    const appointment = state.appointments[id];
+    results.push(appointment);
   }
 
   return results;
 }
+
+// Retrieves the interview for a student
 
 export function getInterview(state, interview) {
   if (!interview) {
     return null;
   }
   const interviewContent = {
-    student: interview.student
+    student: interview.student,
   };
 
   interviewContent.interviewer = state.interviewers[interview.interviewer];
   return interviewContent;
 }
 
+// Retrieves the interviewer for the day selected
+
 export function getInterviewersForDay(state, dayName) {
   const results = [];
-  const day = state.days.find(d => d.name === dayName)
+  const day = state.days.find((d) => d.name === dayName);
   if (!day) {
     return [];
   }
 
   for (const id of day.interviewers) {
-    const interviewer = state.interviewers[id]
-    results.push(interviewer)
+    const interviewer = state.interviewers[id];
+    results.push(interviewer);
   }
 
   return results;

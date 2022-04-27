@@ -12,11 +12,11 @@ import Error from "./Error";
 // transition variables
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
-const CREATE = 'CREATE';
-const SAVING = 'SAVING';
-const DELETING = 'DELETING';
-const CONFIRMING = 'CONFIRMING';
-const EDITING = 'EDITING';
+const CREATE = "CREATE";
+const SAVING = "SAVING";
+const DELETING = "DELETING";
+const CONFIRMING = "CONFIRMING";
+const EDITING = "EDITING";
 const SAVE_ERR = "SAVE_ERR";
 const DELETE_ERR = "DELETE_ERR";
 
@@ -25,7 +25,7 @@ export default function Appointment(props) {
   function save(name, interviewer) {
     const interview = {
       student: name,
-      interviewer
+      interviewer,
     };
 
     transition(SAVING);
@@ -33,15 +33,15 @@ export default function Appointment(props) {
     props
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
-      .catch(error => transition(SAVE_ERR, true));
+      .catch((error) => transition(SAVE_ERR, true));
   }
-
+  // Removing an appointment function
   function deleted(event) {
     transition(DELETING, true);
     props
       .cancelInterview(props.id)
       .then(() => transition(EMPTY))
-      .catch(error => transition(DELETE_ERR, true));
+      .catch((error) => transition(DELETE_ERR, true));
   }
 
   const { mode, transition, back } = useVisualMode(
@@ -52,6 +52,7 @@ export default function Appointment(props) {
     transition(EDITING);
   }
 
+  // Transition handling
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -68,13 +69,11 @@ export default function Appointment(props) {
           interviewer={props.interview.interviewer}
           onDelete={() => transition(CONFIRMING)}
           onEdit={() => edit()}
-        />)}
+        />
+      )}
       {mode === CREATE && (
-        <Form
-          interviewers={props.interviewers}
-          onSave={save}
-          onCancel={back}
-        />)}
+        <Form interviewers={props.interviewers} onSave={save} onCancel={back} />
+      )}
       {mode === SAVING && <Status message="Saving" />}
       {mode === DELETING && <Status message="Deleting" />}
       {mode === CONFIRMING && (
@@ -106,5 +105,5 @@ export default function Appointment(props) {
         />
       )}
     </article>
-  )
+  );
 }
